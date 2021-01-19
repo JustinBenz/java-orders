@@ -1,24 +1,36 @@
 package com.lambdaschool.javaorders.models;
 
-import org.hibernate.criterion.Order;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Payments {
+@Entity
+@Table(name = "payments")
+public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    protected Long payment_id;
+    protected Long paymentid;
 
     @Column(nullable = false, unique = true)
     private String type;
 
     @ManyToMany(mappedBy = "payments")
-    private Set<Orders> orders = new HashSet<>();
+    private Set<Order> orders = new HashSet<>();
 
-    public Payments() {
+    public Payment(String type) {
+        this.type = type;
+    }
 
+    public Payment() {
+
+    }
+
+    public Long getPaymentid() {
+        return paymentid;
+    }
+
+    public void setPaymentid(Long paymentid) {
+        this.paymentid = paymentid;
     }
 
     public String getType() {
@@ -29,11 +41,11 @@ public class Payments {
         this.type = type;
     }
 
-    public Set<Orders> getOrders() {
+    public Set<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Orders> orders) {
+    public void setOrders(Set<Order> orders) {
         this.orders = orders;
     }
 }
