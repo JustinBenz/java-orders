@@ -1,7 +1,6 @@
 package com.lambdaschool.javaorders.services;
 
 import com.lambdaschool.javaorders.models.Customer;
-import com.lambdaschool.javaorders.repositories.AgentsRepository;
 import com.lambdaschool.javaorders.repositories.CustomersRepository;
 import com.lambdaschool.javaorders.views.CustomerOrderNum;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.lambdaschool.javaorders.services;
 
-import com.lambdaschool.javaorders.models.Agent;
+import com.lambdaschool.javaorders.models.Customer;
 import com.lambdaschool.javaorders.models.Order;
 import com.lambdaschool.javaorders.repositories.OrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,4 +21,32 @@ public class OrdersServiceimpl implements OrdersServices{
         Order o = orderepo.findById(ordnum).orElseThrow(() -> new EntityNotFoundException("Order with " + ordnum + "was not found"));
         return null;
     }
+
+    @Transactional
+    @Override
+    public Order save(Order order){
+        Order newOrder = new Order();
+        if(order.getOrdnum() != 0){
+            orderepo.findById(order.getOrdnum()).orElseThrow(() -> new EntityNotFoundException("Customer" + order.getOrdnum() + " was not found!"));
+            newOrder.setOrdnum(order.getOrdnum());
+        }
+        return orderepo.save(newOrder);
+    }
+
+    @Transactional
+    @Override
+    public Order update(Order updatedOrder, long ordnum) {
+        return orderepo.save(updatedOrder);
+    }
+
+    @Transactional
+    @Override
+    public void delete(long ordnum){
+        if(orderepo.findById(ordnum).isPresent()){
+            orderepo.deleteById(ordnum);
+        } else {
+            throw new EntityNotFoundException("Restaurant " + ordnum + "not found!");
+        }
+    }
+
 }

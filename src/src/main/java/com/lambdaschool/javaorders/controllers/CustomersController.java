@@ -1,7 +1,6 @@
 package com.lambdaschool.javaorders.controllers;
 
 import com.lambdaschool.javaorders.models.Customer;
-import com.lambdaschool.javaorders.models.Order;
 import com.lambdaschool.javaorders.services.CustomersServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,7 +46,7 @@ public class CustomersController {
     //POST
     @PostMapping(value = "/customer", produces = "application/json", consumes = "application/json")
     public ResponseEntity<?> addCustomer(@RequestBody Customer newCustomer){
-        newCustomer.setCustcode(0);
+        newCustomer.setCustcode((long)0);
         newCustomer = customersServices.save(newCustomer);
         return new ResponseEntity<>(newCustomer, HttpStatus.CREATED);
     }
