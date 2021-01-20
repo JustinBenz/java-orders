@@ -47,10 +47,11 @@ public class CustomersServicesimpl implements CustomersServices{
     @Override
     public Customer save(Customer customer){
         Customer newCustomer = new Customer();
-    if(customer.getCustcode() != 0){
-        custrepos.findById(customer.getCustcode()).orElseThrow(() -> new EntityNotFoundException("Customer" + customer.getCustcode() + " was not found!"));
-        newCustomer.setCustcode(customer.getCustcode());
-    }
+        if(customer.getCustcode() != 0){
+            custrepos.findById(customer.getCustcode()).orElseThrow(() -> new EntityNotFoundException("Customer" + customer.getCustcode() + " was not found!"));
+            newCustomer.setCustcode(customer.getCustcode());
+        }
+        return custrepos.save(newCustomer);
     }
 
     @Transactional
